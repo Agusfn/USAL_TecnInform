@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ProductoController;
+use App\Http\Controllers\Admin\UsuarioController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+Route::namespace('Admin')->prefix('admin')->group(function() {
+
+	Route::resource('productos', ProductoController::class);
+
+	Route::get("usuarios", [UsuarioController::class, "index"])->name("usuarios.index");
+	Route::get("usuarios/{id}", [UsuarioController::class, "show"])->name("usuarios.show");
+
+});

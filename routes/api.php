@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CarritoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+
+Route::get("productos", [ProductoController::class, "index"]);
+Route::get("productos/{producto}", [ProductoController::class, "show"]);
+
+
+Route::middleware('auth')->group(function() {
+
+	Route::get("carritos/obtener_actual", [CarritoController::class, "obtenerDeUsuario"]);
+	Route::get("carritos/agregar_producto/{id}", [CarritoController::class, "agregarProducto"]);
+	Route::get("carritos/quitar_producto/{id}", [CarritoController::class, "quitarProducto"]);
+	Route::get("carritos/confirmar", [CarritoController::class, "confirmarActual"]);
+	Route::get("carritos/descartar", [CarritoController::class, "descartarActual"]);
+
 });
