@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
-import ProductBox from "./ProductBox"
 import Cart from "./Cart"
 import ResultModal from "./ResultModal"
+import CategoriesList from "./CategoriesList"
+import ProductCatalog from "./ProductCatalog"
+import { filter } from 'lodash';
 
 function Main(props) {
 
@@ -13,13 +15,14 @@ function Main(props) {
     const [products, setProducts] = React.useState([])
     const [cart, setCart] = React.useState(null)
     const [productAddingToCart, setProductAddingToCart] = React.useState(null)
+    const [categories, setCategories] = React.useState([])
+    const [filteredCategories, setFilteredCategories] = React.useState([])
 
     const addProductToCart = (product) => {
         if(authenticated) {
             setProductAddingToCart(product.id)
             axios.post("carritos/agregar_producto/"+product.id).then(response => {
                 setProductAddingToCart(null)
-                console.log("add to cart response: ", response.data)
                 setCart(response.data)
             })
         } else
@@ -27,9 +30,7 @@ function Main(props) {
     }
 
     const removeProductFromCart = (productId) => {
-        console.log("Removing product", productId)
         axios.delete("carritos/quitar_producto/"+productId).then(response => {
-            console.log("remove from cart response: ", response.data)
             setCart(response.data)
         })
     }
@@ -38,21 +39,18 @@ function Main(props) {
         axios.post("carritos/confirmar").then(response => {
             setCart(null)
             $('#resultModal').modal('toggle') // llamada a método de jquery
-            console.log(response)
         })
     }
 
     const discardCart = () => {
         axios.delete("carritos/descartar").then(response => {
             setCart(null)
-            console.log(response)
         })
     }
 
     React.useEffect(() => {
-        axios.get("/productos").then(response => {
-            setProducts(response.data)
-        })
+        axios.get("/productos").then(response => { console.log(response.data); setProducts(response.data)} )
+        axios.get("/categorias").then(response => {console.log(response.data);setCategories(response.data)} )
         if(authenticated) {
             axios.get("carritos/obtener_actual").then(response => {
                 console.log(response.data)
@@ -61,30 +59,31 @@ function Main(props) {
         }
     }, [])
 
-    const productItems = products.map(product => 
-        <ProductBox 
-            key={product.id} 
-            product={product} 
-            onAddToCartClick={() => addProductToCart(product)}
-            addingToCart={productAddingToCart == product.id}
-        />
-    )
 
     return (
         <div className="container">
-
             <ResultModal />
-
             <Cart 
                 cartData={cart} 
                 onProductRemoveClick={removeProductFromCart}
                 onCartConfirmClick={confirmCart}
                 onCartDiscardClick={discardCart}
             />
-
-            <div className="card">
-                <div className="card-body">
-                    {productItems}
+            <div className="row">
+                <div className="col-md-4">
+                    <CategoriesList 
+                        categories={categories} 
+                        filteredCategories={filteredCategories}
+                        onFilteredCategoriesChange={setFilteredCategories}
+                    />
+                </div>
+                <div className="col-md-8">
+                    <ProductCatalog 
+                        products={products}
+                        filteredCategories={filteredCategories}
+                        onAddToCartClick={addProductToCart}
+                        productAddingToCart={productAddingToCart} 
+                    />
                 </div>
             </div>
         </div>

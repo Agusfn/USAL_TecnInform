@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\CategoriaController;
 
 
 /*
@@ -19,7 +20,7 @@ use App\Http\Controllers\CarritoController;
 
 
 
-
+Route::get("categorias", [CategoriaController::class, "index"]);
 Route::get("productos", [ProductoController::class, "index"]);
 Route::get("productos/{producto}", [ProductoController::class, "show"]);
 

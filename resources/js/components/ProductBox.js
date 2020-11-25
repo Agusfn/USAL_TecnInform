@@ -8,9 +8,9 @@ function ProductBox(props) {
     return (
         <div className={"product-box"}>
             <img src={"asd"/*product.imagen*/} />
-            <div className="row">
-                <div className="col-7" style={{height: 46, overflow: "hidden"}}>{product.nombre}</div>
-                <div className="col-5">${Math.round(product.precio)}</div>
+            <div className="clearfix">
+                <div style={{float: "left", height: 46, overflow: "hidden", maxWidth: 120}}>{product.nombre}</div>
+                <div style={{float: "right"}}>${Math.round(product.precio)}</div>
             </div>
             <div style={{textAlign: 'center', marginTop: 10}}>
                 {!addingToCart &&
