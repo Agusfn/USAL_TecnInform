@@ -1,4 +1,14 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);.product-box {
+    width: 25%;
+    float: left;
+    padding: 20px;
+    border: 1px solid #EEE;
+}
+
+
+.product-box img {
+    width: 100%
+}@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)

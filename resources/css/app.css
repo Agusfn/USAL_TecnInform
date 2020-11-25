@@ -1,0 +1,11 @@
+.product-box {
+    width: 25%;
+    float: left;
+    padding: 20px;
+    border: 1px solid #EEE;
+}
+
+
+.product-box img {
+    width: 100%
+}

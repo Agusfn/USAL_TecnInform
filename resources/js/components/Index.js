@@ -1,24 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios'
+import ProductBox from "./ProductBox"
+import Cart from "./Cart"
 
-function Example() {
+function Main() {
+
+    const [products, setProducts] = React.useState([])
+
+    React.useEffect(() => {
+
+
+        axios.get("/productos").then(response => {
+            setProducts(response.data)
+        }).catch(error => {
+            console.log("error: ", error)
+        })
+
+        axios.get("carritos/obtener_actual").then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.log("error: ", error)
+        })
+
+
+    }, [])
+
+    const productItems = products.map(product => <ProductBox key={product.id} product={product} />)
+
     return (
         <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
 
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
+            <Cart />
+
+            <div className="card">
+                <div className="card-body">
+                    {productItems}
                 </div>
             </div>
         </div>
     );
 }
 
-export default Example;
+export default Main;
 
-if (document.getElementById('example')) {
-    ReactDOM.render(<Example />, document.getElementById('example'));
+if (document.getElementById('content')) {
+    ReactDOM.render(<Main />, document.getElementById('content'));
 }

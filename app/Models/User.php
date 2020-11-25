@@ -40,4 +40,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function carritos()
+    {
+        return $this->hasMany("App\Models\Carrito", "id_usuario");
+    }
+
+
+    public function carritoActivo()
+    {
+        $carrito = $this->carritos()->enProceso()->masReciente()->first();
+        if($carrito) {
+            return $carrito->with("items")->first();
+        } else {
+            return null;
+        }
+    }
+
+
 }
