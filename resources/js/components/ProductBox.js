@@ -17,7 +17,7 @@ function ProductBox(props) {
                     <button className={"btn btn-primary"} onClick={onAddToCartClick} >Agregar al carrito</button>
                 }
                 {addingToCart && 
-                    <div>Loading</div>
+                    <i className="fa fa-spinner fa-spin fa-lg fa-fw"></i>
                 }
             </div>
             

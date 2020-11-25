@@ -11,5 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js')
+mix.setResourceRoot('/USAL_TecnInform/public/') // important when using subfolder in local environment (XAMPP, etc) for font paths/etc
+    .react('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

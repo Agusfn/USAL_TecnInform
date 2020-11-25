@@ -27,9 +27,9 @@ Route::get("productos/{producto}", [ProductoController::class, "show"]);
 Route::middleware('auth')->group(function() {
 
 	Route::get("carritos/obtener_actual", [CarritoController::class, "obtenerDeUsuario"]);
-	Route::get("carritos/agregar_producto/{producto}", [CarritoController::class, "agregarProducto"]);
-	Route::get("carritos/quitar_producto/{producto}", [CarritoController::class, "quitarProducto"]);
-	Route::get("carritos/confirmar", [CarritoController::class, "confirmarActual"]);
-	Route::get("carritos/descartar", [CarritoController::class, "descartarActual"]);
+	Route::post("carritos/agregar_producto/{producto}", [CarritoController::class, "agregarProducto"]);
+	Route::delete("carritos/quitar_producto/{producto}", [CarritoController::class, "quitarProducto"]);
+	Route::post("carritos/confirmar", [CarritoController::class, "confirmarActual"]);
+	Route::delete("carritos/descartar", [CarritoController::class, "descartarActual"]);
 
 });

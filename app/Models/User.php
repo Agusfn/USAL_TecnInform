@@ -48,7 +48,7 @@ class User extends Authenticatable
     }
 
 
-    public function carritoActivo()
+    public function obtenerCarritoActivo()
     {
         $carrito = $this->carritos()->enProceso()->masReciente()->first();
         if($carrito) {

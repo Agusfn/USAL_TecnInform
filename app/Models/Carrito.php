@@ -70,4 +70,73 @@ class Carrito extends Model
         $this->save();
     }
 
+
+    /**
+     * Remover un producto individual del carrito.
+     * @param  Producto $producto [description]
+     * @return [type]             [description]
+     */
+    public function removerProducto(Producto $producto) 
+    {
+
+        $existingItem = $this->items()->where("id_producto", $producto->id)->first();
+
+        if ($existingItem) {
+
+            $itemPrice = $existingItem->precio_unitario;
+
+            if($existingItem->cantidad > 1) {
+                $existingItem->cantidad -= 1;
+                $existingItem->total -= $itemPrice;
+                $existingItem->save();
+            } else {
+                $existingItem->delete();
+            }
+
+            $this->total -= $itemPrice;
+            $this->save();
+        }
+    }
+
+
+    /**
+     * Devolver un array asociativo con los datos minimo necesarios del carrito, con una lista de items compactos (sin mayores niveles de anidacion), 
+     * usados en la lista de items de la app js front end 
+     * @return array
+     */
+    public function arrayParaJs()
+    {
+        $items = $this->items()->with("producto")->get();
+
+        $compactItems = [];
+        foreach($items as $item) 
+        {
+            $compactItems[] = [
+                "id_producto" => $item->id_producto,
+                "nombre_producto" => $item->producto->nombre,
+                "imagen_producto" => $item->producto->imagen,
+                "precio_unitario" => $item->precio_unitario,
+                "cantidad" => $item->cantidad,
+                "total" => $item->total
+            ];
+        }
+
+        $compactCart = [
+            "id_usuario" => $this->id_usuario,
+            "estado" => $this->estado,
+            "items" => $compactItems,
+            "total" => $this->total
+        ];
+
+        return $compactCart;
+    }
+
+
+
+    public function confirmar()
+    {
+        $this->estado = self::ESTADO_FINALIZADO;
+        $this->save();
+    }
+
 }
