@@ -115,9 +115,9 @@ class Carrito extends Model
                 "id_producto" => $item->id_producto,
                 "nombre_producto" => $item->producto->nombre,
                 "imagen_producto" => $item->producto->imagen,
-                "precio_unitario" => $item->precio_unitario,
+                "precio_unitario" => floatval($item->precio_unitario),
                 "cantidad" => $item->cantidad,
-                "total" => $item->total
+                "total" => floatval($item->total)
             ];
         }
 
@@ -125,7 +125,7 @@ class Carrito extends Model
             "id_usuario" => $this->id_usuario,
             "estado" => $this->estado,
             "items" => $compactItems,
-            "total" => $this->total
+            "total" => floatval($this->total)
         ];
 
         return $compactCart;
@@ -138,5 +138,7 @@ class Carrito extends Model
         $this->estado = self::ESTADO_FINALIZADO;
         $this->save();
     }
+
+
 
 }

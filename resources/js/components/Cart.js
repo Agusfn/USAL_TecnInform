@@ -8,16 +8,14 @@ function Cart(props) {
     let itemsCount = 0
     let cartItemsElements = null
     if(cartData && cartData.items.length > 0) {
-        cartData.items.forEach(item => {
+        cartItemsElements = cartData.items.map(item => {
             itemsCount += item.cantidad
-        })
-        cartItemsElements = cartData.items.map(item => 
-            <CartItem 
+            return <CartItem 
                 key={item.id_producto} 
                 item={item} 
                 onItemRemoveClick={onProductRemoveClick}
             />
-        )
+        })
     } else {
         cartItemsElements = <tr><td>No hay elementos en el carrito</td></tr>
     }
@@ -36,10 +34,16 @@ function Cart(props) {
                         </tbody>
                     </table>
                     {itemsCount > 0 &&
-                        <div style={{paddingLeft: 10, paddingRight: 10}}>
-                            <button className="btn btn-secondary" style={{float: "left"}} onClick={onCartDiscardClick}>Descartar</button>
-                            <button className="btn btn-success" style={{float: "right"}} onClick={onCartConfirmClick}>Confirmar</button>
-                        </div>
+                        <>
+                            <div className="clearfix" style={{marginBottom: 20, fontSize: 18}}>
+                                <div style={{float: "left", marginLeft: 20}}>Total:</div>
+                                <div style={{float: "right", marginRight: 20}}>${cartData.total}</div>
+                            </div>
+                            <div style={{paddingLeft: 10, paddingRight: 10}}>
+                                <button className="btn btn-secondary" style={{float: "left"}} onClick={onCartDiscardClick}>Descartar</button>
+                                <button className="btn btn-success" style={{float: "right"}} onClick={onCartConfirmClick}>Confirmar</button>
+                            </div>
+                        </>
                     }
                 </div>
             </div>

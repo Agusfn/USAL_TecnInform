@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Models\Carrito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CarritoController extends Controller
 {
@@ -34,7 +35,9 @@ class CarritoController extends Controller
 	{
 		$user = Auth::user();
 		
-		if(!$carrito = $user->obtenerCarritoActivo()) {
+		$carrito = $user->obtenerCarritoActivo();
+		Log::debug($carrito);
+		if(!$carrito) {
 			$carrito = Carrito::create(["id_usuario" => $user->id]);
 		}
 
@@ -57,18 +60,27 @@ class CarritoController extends Controller
 	}
 
 
+	/**
+	 * Confirmar carrito
+	 * @return [type] [description]
+	 */
 	public function confirmarActual()
 	{
 		if($carrito = Auth::user()->obtenerCarritoActivo()) {
-			// confirmar carrito
+			$carrito->confirmar();
 		}
 	}
 
 
+	/**
+	 * Descartar carrito
+	 * @return [type] [description]
+	 */
 	public function descartarActual()
 	{
 		if($carrito = Auth::user()->obtenerCarritoActivo()) {
-			// descartar carrito
+			$carrito->items()->delete();
+			$carrito->delete();
 		}
 	}
 

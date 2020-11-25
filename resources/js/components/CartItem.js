@@ -24,9 +24,9 @@ function CartItem(props) {
         <tr>
             <td><img src={item.imagen_producto} style={{width: 50}} /></td>
             <td>{item.nombre_producto}</td>
-            <td>${Math.round(item.precio_unitario)}</td>
+            <td>${item.precio_unitario}</td>
             <td>x{item.cantidad}</td>
-            <td>${Math.round(item.total)}</td>
+            <td>${item.total}</td>
             <td>
                 {!removing &&
                     <button className="btn btn-sm btn-danger" onClick={removeItem}>x</button>

@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import axios from 'axios'
 import ProductBox from "./ProductBox"
 import Cart from "./Cart"
+import ResultModal from "./ResultModal"
 
 function Main(props) {
 
-    const { authenticated } = props
+    //const {  } = props
+    const authenticated = (props.authenticated == "true") ? true : false
 
     const [products, setProducts] = React.useState([])
     const [cart, setCart] = React.useState(null)
     const [productAddingToCart, setProductAddingToCart] = React.useState(null)
-
 
     const addProductToCart = (product) => {
         if(authenticated) {
@@ -21,29 +22,31 @@ function Main(props) {
                 console.log("add to cart response: ", response.data)
                 setCart(response.data)
             })
-        } else {
-            // redirect to lgin
-        }
+        } else
+            window.location.href = 'login';
     }
 
     const removeProductFromCart = (productId) => {
         console.log("Removing product", productId)
-        if(authenticated) {
-            axios.delete("carritos/quitar_producto/"+productId).then(response => {
-                console.log("remove from cart response: ", response.data)
-                setCart(response.data)
-            })
-        } else {
-            // redirect to lgin
-        }
+        axios.delete("carritos/quitar_producto/"+productId).then(response => {
+            console.log("remove from cart response: ", response.data)
+            setCart(response.data)
+        })
     }
 
     const confirmCart = () => {
-
+        axios.post("carritos/confirmar").then(response => {
+            setCart(null)
+            $('#resultModal').modal('toggle') // llamada a método de jquery
+            console.log(response)
+        })
     }
 
     const discardCart = () => {
-
+        axios.delete("carritos/descartar").then(response => {
+            setCart(null)
+            console.log(response)
+        })
     }
 
     React.useEffect(() => {
@@ -69,6 +72,8 @@ function Main(props) {
 
     return (
         <div className="container">
+
+            <ResultModal />
 
             <Cart 
                 cartData={cart} 

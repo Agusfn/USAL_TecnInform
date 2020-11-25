@@ -50,9 +50,9 @@ class User extends Authenticatable
 
     public function obtenerCarritoActivo()
     {
-        $carrito = $this->carritos()->enProceso()->masReciente()->first();
-        if($carrito) {
-            return $carrito->with("items")->first();
+        $carritoQuery = $this->carritos()->enProceso()->masReciente();
+        if($carritoQuery->count() >= 1) {
+            return $carritoQuery->with("items")->first();
         } else {
             return null;
         }
