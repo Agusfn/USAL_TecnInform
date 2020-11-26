@@ -15,7 +15,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.usuarios.index")->with([
+            "usuarios" => User::all()
+        ]);
     }
 
     /**
@@ -26,7 +28,10 @@ class UsuarioController extends Controller
      */
     public function show(User $usuario)
     {
-        //
+        $usuario->load("carritos.items.producto");
+        return view("admin.usuarios.show")->with([
+            "usuario" => $usuario
+        ]);
     }
 
 }

@@ -20,6 +20,7 @@ class CreateProductosTable extends Migration
             $table->string("imagen");
             $table->decimal("precio", 10, 2);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('id_categoria')->references('id')->on('categorias');
 

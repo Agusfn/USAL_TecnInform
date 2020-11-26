@@ -16,8 +16,11 @@ class CategoriaSeeder extends Seeder
     {
 		DB::table('categorias')->insert([
         	['id' => 1, 'nombre' => "Celulares"],
-        	['id' => 2, 'nombre' => "TVs"],
-        	['id' => 3, 'nombre' => "Electrodomésticos"]
+            ['id' => 2, 'nombre' => "Tablets"],
+            ['id' => 3, 'nombre' => "TVs"],
+            ['id' => 4, 'nombre' => "Smartwatches"],
+            ['id' => 5, 'nombre' => "Media streaming"],
+            ['id' => 6, 'nombre' => "Laptops"]
         ]);
     }
 }

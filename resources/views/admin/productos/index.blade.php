@@ -44,7 +44,7 @@
 										@foreach($productos as $producto)
 										<tr>
 											<td><a class="btn btn-primary" href="{{ route('productos.show', $producto->id) }}"><i class="fa fa-search-plus" aria-hidden="true"></i></a></td>
-											<td><img class="product-img" src="{{ $producto->imagen }}"></td>
+											<td><img class="product-img" src="{{ $producto->img_url }}"></td>
 											<td>{{ $producto->nombre }}</td>
 											<td>{{ $producto->categoria->nombre }}</td>
 											<td>${{ $producto->precio }}</td>

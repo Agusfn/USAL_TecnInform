@@ -50,6 +50,7 @@
 										<div class="btn-group" style="float:right">
 											<form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display: inline-block;">
 												@csrf
+												@method('delete')
 												<button type="button" class="btn btn-danger" onclick="if(confirm('¿Eliminar producto?')) $(this).parent().submit();">Eliminar producto</button>
 											</form>
 										</div>
@@ -103,7 +104,7 @@
 											<label>Imágen</label>
 											@if(isset($producto) && $producto->imagen)
 											<div id="product-img" style="margin-bottom: 15px">
-												<img src="{{ $producto->imgUrl() }}" style="max-width: 100%; margin-bottom: 10px" />
+												<img src="{{ $producto->img_url }}" style="max-width: 100%; margin-bottom: 10px" />
 												<button type="button" class="btn btn-sm btn-secondary" onclick="$('#product-img').hide();$('#img-input').show()">Cambiar imagen</button>
 											</div>
 											@endif

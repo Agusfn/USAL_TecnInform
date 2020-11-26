@@ -114,7 +114,7 @@ class Carrito extends Model
             $compactItems[] = [
                 "id_producto" => $item->id_producto,
                 "nombre_producto" => $item->producto->nombre,
-                "imagen_producto" => $item->producto->imagen,
+                "imagen_producto" => $item->producto->img_url,
                 "precio_unitario" => floatval($item->precio_unitario),
                 "cantidad" => $item->cantidad,
                 "total" => floatval($item->total)
@@ -140,5 +140,9 @@ class Carrito extends Model
     }
 
 
+    public function estaFinalizado()
+    {
+        return $this->estado == self::ESTADO_FINALIZADO;
+    }
 
 }

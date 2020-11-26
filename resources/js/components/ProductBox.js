@@ -7,7 +7,7 @@ function ProductBox(props) {
 
     return (
         <div className={"product-box"}>
-            <img src={"asd"/*product.imagen*/} />
+            <img src={product.img_url} />
             <div className="clearfix">
                 <div style={{float: "left", height: 46, overflow: "hidden", maxWidth: 120}}>{product.nombre}</div>
                 <div style={{float: "right"}}>${Math.round(product.precio)}</div>

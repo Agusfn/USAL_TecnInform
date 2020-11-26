@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany("App\Models\Carrito", "id_usuario");
     }
 
+    public function scopeUsuarioRegular($query)
+    {
+        return $query->where('rol', self::ROL_USUARIO);
+    }
+
 
     public function obtenerCarritoActivo()
     {

@@ -91,9 +91,7 @@ class ProductoController extends Controller
         ]);
 
         if($request->has("imagen")) {
-            if($producto->imagen) {
-                Storage::delete($producto->imagen);
-            }
+            $producto->borrarImgActual();
             $path = $request->file("imagen")->store("productos");
             $producto->imagen = $path;
         }
@@ -112,6 +110,7 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+        $producto->delete();
+        return redirect()->route("productos.index");
     }
 }

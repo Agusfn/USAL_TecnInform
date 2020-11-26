@@ -31,7 +31,7 @@ Route::prefix('admin')->middleware(["auth", "isAdmin"])->group(function() {
 	Route::resource('productos', ProductoController::class);
 
 	Route::get("usuarios", [UsuarioController::class, "index"])->name("usuarios.index");
-	Route::get("usuarios/{id}", [UsuarioController::class, "show"])->name("usuarios.show");
+	Route::get("usuarios/{usuario}", [UsuarioController::class, "show"])->name("usuarios.show");
 
 	Route::get("categorias", [CategoriaController::class, "index"])->name("categorias.index");
 
