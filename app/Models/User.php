@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ROL_ADMIN = "admin";
+    const ROL_USUARIO = "user";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -56,6 +59,12 @@ class User extends Authenticatable
         } else {
             return null;
         }
+    }
+
+
+    public function esAdmin()
+    {
+        return $this->rol == self::ROL_ADMIN;
     }
 
 
