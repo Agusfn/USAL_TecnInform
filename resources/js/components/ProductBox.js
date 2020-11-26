@@ -7,12 +7,12 @@ function ProductBox(props) {
 
     return (
         <div className={"product-box"}>
-            <img src={product.img_url} />
+            <img src={product.img_url} className="product-img" />
             <div className="clearfix">
                 <div style={{float: "left", height: 46, overflow: "hidden", maxWidth: 120}}>{product.nombre}</div>
                 <div style={{float: "right"}}>${Math.round(product.precio)}</div>
             </div>
-            <div style={{textAlign: 'center', marginTop: 10}}>
+            <div style={{textAlign: 'center', marginTop: 10, height: 37}}>
                 {!addingToCart &&
                     <button className={"btn btn-primary"} onClick={onAddToCartClick} >Agregar al carrito</button>
                 }

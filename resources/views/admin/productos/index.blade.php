@@ -9,8 +9,10 @@
 			vertical-align: middle;
 		}
 		.product-img {
-			width: 65px;
-		    padding: 2px;
+			width: 100px;
+			height: 100px;
+			object-fit: cover;
+		    padding: 1px;
 		    background-color: #BBB;
 		}
 	</style>

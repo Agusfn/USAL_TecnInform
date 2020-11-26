@@ -1,6 +1,6 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="{{ route('productos.index') }}"><img src="{{ asset('resources/admin/img/logo.png') }}" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="{{ route('productos.index') }}"><span style="color: #444;font-size: 21px;">{{ config('app.name') }}</span></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">

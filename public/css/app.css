@@ -6,9 +6,24 @@
 }
 
 
-.product-box img {
-    width: 100%
-}@charset "UTF-8";
+.product-img {
+    width: 100%;
+    height: 185px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+
+.cart-table tbody td {
+    vertical-align: middle;
+}
+
+.cart-item-img {
+    width: 50px;
+    height: 50px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+@charset "UTF-8";
 
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome

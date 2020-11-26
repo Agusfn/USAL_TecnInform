@@ -28,7 +28,15 @@ function Cart(props) {
                     Carrito ({itemsCount})
                 </button>
                 <div className="dropdown-menu" style={{padding: 20}}>
-                    <table className="table table-condensed">
+                    <table className="table table-sm cart-table">
+                        <thead>
+                            <tr>
+                                <th colSpan={2}>Item</th>
+                                <th>Precio unit.</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {cartItemsElements}
                         </tbody>

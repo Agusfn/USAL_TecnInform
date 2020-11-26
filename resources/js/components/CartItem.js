@@ -22,14 +22,14 @@ function CartItem(props) {
 
     return (
         <tr>
-            <td><img src={item.imagen_producto} style={{width: 50}} /></td>
+            <td><img src={item.imagen_producto} class="cart-item-img" /></td>
             <td>{item.nombre_producto}</td>
             <td>${item.precio_unitario}</td>
             <td>x{item.cantidad}</td>
             <td>${item.total}</td>
             <td>
                 {!removing &&
-                    <button className="btn btn-sm btn-danger" onClick={removeItem}>x</button>
+                    <button className="btn btn-sm btn-outline-danger" onClick={removeItem}>x</button>
                 }
                 {removing && 
                     <i className="fa fa-spinner fa-spin fa-lg fa-fw"></i>
