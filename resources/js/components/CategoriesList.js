@@ -21,6 +21,7 @@ function CategoriesList(props) {
     const buttons = categories.map(category => {
         return (
             <button 
+                key={category.id}
                 type="button" 
                 className={"btn btn-light" + (filteredCategories.includes(category.id) ? " active" : null)} 
                 onClick={() => toggleCategory(category)}

@@ -49,11 +49,11 @@ function Main(props) {
     }
 
     React.useEffect(() => {
-        axios.get("/productos").then(response => { console.log(response.data); setProducts(response.data)} )
-        axios.get("/categorias").then(response => {console.log(response.data);setCategories(response.data)} )
+        axios.get("/productos").then(response => setProducts(response.data))
+        axios.get("/categorias").then(response => setCategories(response.data))
         if(authenticated) {
             axios.get("carritos/obtener_actual").then(response => {
-                console.log(response.data)
+                //console.log(response.data)
                 setCart(response.data)
             })
         }

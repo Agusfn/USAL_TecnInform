@@ -22,7 +22,7 @@ function CartItem(props) {
 
     return (
         <tr>
-            <td><img src={item.imagen_producto} class="cart-item-img" /></td>
+            <td><img src={item.imagen_producto} className="cart-item-img" /></td>
             <td>{item.nombre_producto}</td>
             <td>${item.precio_unitario}</td>
             <td>x{item.cantidad}</td>

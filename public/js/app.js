@@ -65999,7 +65999,7 @@ function CartItem(props) {
   }, [item]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: item.imagen_producto,
-    "class": "cart-item-img"
+    className: "cart-item-img"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, item.nombre_producto), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", item.precio_unitario), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "x", item.cantidad), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", item.total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, !removing && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-sm btn-outline-danger",
     onClick: removeItem
@@ -66050,6 +66050,7 @@ function CategoriesList(props) {
 
   var buttons = categories.map(function (category) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      key: category.id,
       type: "button",
       className: "btn btn-light" + (filteredCategories.includes(category.id) ? " active" : null),
       onClick: function onClick() {
@@ -66181,17 +66182,15 @@ function Main(props) {
 
   react__WEBPACK_IMPORTED_MODULE_0___default.a.useEffect(function () {
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/productos").then(function (response) {
-      console.log(response.data);
-      setProducts(response.data);
+      return setProducts(response.data);
     });
     axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/categorias").then(function (response) {
-      console.log(response.data);
-      setCategories(response.data);
+      return setCategories(response.data);
     });
 
     if (authenticated) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("carritos/obtener_actual").then(function (response) {
-        console.log(response.data);
+        //console.log(response.data)
         setCart(response.data);
       });
     }
